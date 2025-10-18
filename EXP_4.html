@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 5px gray;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin: 8px 0;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Registration Form</h2>
+    <form onsubmit="return validateForm()">
+      <label>First Name:</label>
+      <input type="text" id="fname" placeholder="Enter First Name">
+
+      <label>Last Name:</label>
+      <input type="text" id="lname" placeholder="Enter Last Name">
+
+      <label>Password:</label>
+      <input type="password" id="password" placeholder="Enter Password">
+
+      <label>Email:</label>
+      <input type="text" id="email" placeholder="Enter Email">
+
+      <label>Mobile Number:</label>
+      <input type="text" id="mobile" placeholder="Enter 10-digit number">
+
+      <label>Address:</label>
+      <textarea id="address" placeholder="Enter Address"></textarea>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      var fname = document.getElementById("fname").value.trim();
+      var lname = document.getElementById("lname").value.trim();
+      var password = document.getElementById("password").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var mobile = document.getElementById("mobile").value.trim();
+      var address = document.getElementById("address").value.trim();
+
+      // First name: alphabets only and at least 6 characters
+      var nameRegex = /^[A-Za-z]+$/;
+      if (!fname.match(nameRegex) || fname.length < 6) {
+        alert("First Name must contain only alphabets and be at least 6 characters long.");
+        return false;
+      }
+
+      // Last name: not empty
+      if (lname === "") {
+        alert("Last Name cannot be empty.");
+        return false;
+      }
+
+      // Password: at least 6 characters
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return false;
+      }
+
+      // Email: valid format
+      var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!email.match(emailRegex)) {
+        alert("Please enter a valid email address (example: name@domain.com).");
+        return false;
+      }
+
+      // Mobile number: exactly 10 digits
+      var mobileRegex = /^[0-9]{10}$/;
+      if (!mobile.match(mobileRegex)) {
+        alert("Mobile number must contain exactly 10 digits.");
+        return false;
+      }
+
+      // Address: not empty
+      if (address === "") {
+        alert("Address cannot be empty.");
+        return false;
+      }
+
+      alert("Registration Successful!");
+      return true;
+    }
+  </script>
+
+</body>
+</html>
